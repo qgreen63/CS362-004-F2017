@@ -645,15 +645,15 @@ int getCost(int cardNumber)
 
 
 // Implementation of the smithy card (+3 cards)
-int smithyFunc(int currentPlayer, struct gameState *state, int handPos) {
+int smithyFunc(int currentPlayer, struct gameState state, int handPos) {
   int i;
   for (i = 0; i < 3; i++)
     {
-      drawCard(currentPlayer, state);
+      drawCard(currentPlayer, &state);
     }
                     
   //discard card from hand
-  discardCard(handPos, currentPlayer, state, 0);
+  discardCard(handPos, currentPlayer, &state, 0);
   return 0;
 }
 
@@ -884,7 +884,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 		
     case smithy:
       //+3 Cards
-      return smithyFunc(currentPlayer, state, handPos);
+      return smithyFunc(currentPlayer, *state, handPos);
 		
     case village:
       return villageFunc(currentPlayer, state, handPos);
