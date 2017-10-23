@@ -26,19 +26,23 @@ int main () {
                   salvager
                 };
 
-    struct gameState state;
+    struct gameState cleanState;
+    // While not strictly necessary, invoking initialize game does set
+    // the supply counts to the proper values saving a lot of work here.
+    initializeGame(numPlayer, k, seed, &cleanState);
+
+    struct gameState state = cleanState;
 
     printf("\nTesting isGameOver:\n");
 
     // New game shouldn't be over before anything happens
-    initializeGame(numPlayer, k, seed, &state);
-    assertTrue(!isGameOver(&state));
+    assertTrue(!isGameOver(&cleanState));
 
     // Make sure that the game ends when province card supply is depleted
     state.supplyCount[province] = 0;
     assertTrue(isGameOver(&state));
 
-    initializeGame(numPlayer, k, seed, &state); // Reset Game
+    state = cleanState; // Reset Game
 
     // Make sure game ends when 3 supply piles are empty
     //   First check boundaries.
@@ -48,7 +52,7 @@ int main () {
     state.supplyCount[duchy] = 0;
     assertTrue(isGameOver(&state));
         
-    initializeGame(numPlayer, k, seed, &state); // Reset Game
+    state = cleanState; // Reset Game
 
     //     Last 3 supply piles empty
     state.supplyCount[salvager] = 0;
@@ -56,7 +60,7 @@ int main () {
     state.supplyCount[treasure_map] = 0;
     assertTrue(isGameOver(&state));
 
-    initializeGame(numPlayer, k, seed, &state); // Reset Game
+    state = cleanState; // Reset Game
 
     //   Now check middle of array
     state.supplyCount[copper] = 0;
@@ -64,7 +68,7 @@ int main () {
     state.supplyCount[minion] = 0;
     assertTrue(isGameOver(&state));
 
-    initializeGame(numPlayer, k, seed, &state); // Reset Game
+    state = cleanState; // Reset Game
 
     // Ensure that the game doesn't end if 2 piles are gone
     state.supplyCount[curse] = 0;
@@ -76,7 +80,7 @@ int main () {
     state.supplyCount[province] = 0;
     assertTrue(isGameOver(&state));
 
-    initializeGame(numPlayer, k, seed, &state); // Reset Game
+    state = cleanState; // Reset Game
 
     // Make sure the game still ends if >3 supply piles are empty
     state.supplyCount[copper] = 0;
