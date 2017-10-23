@@ -8,6 +8,7 @@ dominion.o: dominion.h dominion.c rngs.o
 
 playdom: dominion.o playdom.c
 	gcc -o playdom playdom.c -g dominion.o rngs.o $(CFLAGS)
+
 #To run playdom you need to entere: ./playdom <any integer number> like ./playdom 10*/
 testDrawCard: testDrawCard.c dominion.o rngs.o
 	gcc  -o testDrawCard -g  testDrawCard.c dominion.o rngs.o $(CFLAGS)
@@ -36,7 +37,7 @@ player: player.c interface.o
 asserttrue.o: asserttrue.h asserttrue.c
 	gcc -c asserttrue.c -g $(CFLAGS)
 
-unittestresults.out: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o rngs.o asserttrue.o
+unittestresults.out: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c dominion.o rngs.o asserttrue.o
 	echo "Test Results:" > unittestresults.out
 	
 	echo "unittest1.c:" >> unittestresults.out
@@ -59,7 +60,11 @@ unittestresults.out: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o 
 	./unittest4 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 	
-
+	echo "cardtest1.c:" >> unittestresults.out
+	gcc -o cardtest1 cardtest1.c -g dominion.o rngs.o asserttrue.o $(CFLAGS)
+	./cardtest1 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	
 
 all: playdom player testDrawCard testBuyCard badTestDrawCard
 
