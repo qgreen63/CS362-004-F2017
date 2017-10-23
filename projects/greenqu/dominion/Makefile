@@ -36,7 +36,7 @@ player: player.c interface.o
 asserttrue.o: asserttrue.h asserttrue.c
 	gcc -c asserttrue.c -g $(CFLAGS)
 
-unittestresults.out: unittest1.c unittest2.c unittest3.c dominion.o rngs.o asserttrue.o
+unittestresults.out: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o rngs.o asserttrue.o
 	echo "Test Results:" > unittestresults.out
 	
 	echo "unittest1.c:" >> unittestresults.out
@@ -54,7 +54,10 @@ unittestresults.out: unittest1.c unittest2.c unittest3.c dominion.o rngs.o asser
 	./unittest3 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 	
-
+	echo "unittest4.c:" >> unittestresults.out
+	gcc -o unittest4 unittest4.c -g dominion.o rngs.o asserttrue.o $(CFLAGS)
+	./unittest4 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
 	
 
 
