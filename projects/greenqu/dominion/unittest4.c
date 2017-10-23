@@ -32,7 +32,6 @@ int main () {
     //   curse (card index 0)
     state.handCount[0] = 1;
     state.hand[0][0] = curse;
-    printf("test start");
     assertTrue(fullDeckCount(0, curse, &state) == 1);
 
     state.deckCount[0] = 1;
