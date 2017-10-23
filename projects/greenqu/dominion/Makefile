@@ -65,6 +65,14 @@ unittestresults.out: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c
 	./cardtest1 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 	
+	echo "cardtest2.c:" >> unittestresults.out
+	gcc -o cardtest2 cardtest2.c -g dominion.o rngs.o asserttrue.o $(CFLAGS)
+	./cardtest2 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+
+
+
+	
 
 all: playdom player testDrawCard testBuyCard badTestDrawCard
 
