@@ -36,15 +36,23 @@ player: player.c interface.o
 asserttrue.o: asserttrue.h asserttrue.c
 	gcc -c asserttrue.c -g $(CFLAGS)
 
-randomtestresults.out: randomtestadventurer.c dominion.o rngs.o asserttrue.o
-	echo "Test Results:" > randomtestresults.out
+randomtestadventurer.out: randomtestadventurer.c dominion.o rngs.o asserttrue.o
+	echo "Test Results:" > randomtestadventurer.out
 	
-	echo "randomtestadventurer.c:" >> randomtestresults.out
+	echo "randomtestadventurer.c:" >> randomtestadventurer.out
 	gcc -o randomtestadventurer randomtestadventurer.c -g dominion.o rngs.o asserttrue.o $(CFLAGS)
-	./randomtestadventurer >> randomtestresults.out
-	gcov -f dominion.c >> randomtestresults.out
+	./randomtestadventurer >> randomtestadventurer.out
+	gcov -f dominion.c >> randomtestadventurer.out
+
+randomtestcard1.out: randomtestcard1.c dominion.o rngs.o asserttrue.o
+	echo "Test Results:" > randomtestcard1.out
+	
+	echo "randomtestcard1.c:" >> randomtestcard1.out
+	gcc -o randomtestcard1 randomtestcard1.c -g dominion.o rngs.o asserttrue.o $(CFLAGS)
+	./randomtestcard1 >> randomtestcard1.out
+	gcov -f dominion.c >> randomtestcard1.out
 
 all: playdom player testDrawCard testBuyCard badTestDrawCard
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe randomtestadventurer.out
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe randomtestadventurer.out randomtestcard1.out
