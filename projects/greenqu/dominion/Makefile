@@ -42,7 +42,7 @@ randomtestadventurer.out: randomtestadventurer.c dominion.o rngs.o asserttrue.o
 	echo "randomtestadventurer.c:" >> randomtestadventurer.out
 	gcc -o randomtestadventurer randomtestadventurer.c -g dominion.o rngs.o asserttrue.o $(CFLAGS)
 	./randomtestadventurer >> randomtestadventurer.out
-	gcov -f dominion.c >> randomtestadventurer.out
+	gcov -f -b dominion.c >> randomtestadventurer.out
 
 randomtestcard2.out: randomtestcard2.c dominion.o rngs.o asserttrue.o
 	echo "Test Results:" > randomtestcard2.out
@@ -50,7 +50,7 @@ randomtestcard2.out: randomtestcard2.c dominion.o rngs.o asserttrue.o
 	echo "randomtestcard2.c:" >> randomtestcard2.out
 	gcc -o randomtestcard2 randomtestcard2.c -g dominion.o rngs.o asserttrue.o $(CFLAGS)
 	./randomtestcard2 >> randomtestcard2.out
-	gcov -f dominion.c >> randomtestcard2.out
+	gcov -f -b dominion.c >> randomtestcard2.out
 
 randomtestcard1.out: randomtestcard1.c dominion.o rngs.o asserttrue.o
 	echo "Test Results:" > randomtestcard1.out
@@ -58,7 +58,7 @@ randomtestcard1.out: randomtestcard1.c dominion.o rngs.o asserttrue.o
 	echo "randomtestcard1.c:" >> randomtestcard1.out
 	gcc -o randomtestcard1 randomtestcard1.c -g dominion.o rngs.o asserttrue.o $(CFLAGS)
 	./randomtestcard1 >> randomtestcard1.out
-	gcov -f dominion.c >> randomtestcard1.out
+	gcov -f -b dominion.c >> randomtestcard1.out
 
 
 all: playdom player testDrawCard testBuyCard badTestDrawCard
