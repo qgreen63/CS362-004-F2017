@@ -33,6 +33,9 @@ runtests: testDrawCard
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
+asserttrue.o: asserttrue.h asserttrue.c
+	gcc -c asserttrue.c -g $(CFLAGS)
+
 all: playdom player testDrawCard testBuyCard badTestDrawCard
 
 clean:
