@@ -59,6 +59,9 @@ int randomTestGen(int iterations) {
         for (i = 0; i < handCount; ++ i)
             state.hand[t][i] = rand() % (treasure_map + 1);
 
+        // Randomize played card count
+        state.playedCardCount = rand () % MAX_DECK;
+
         // Choose which card to play (doesn't have to be an adventurer)
         cardIndex = rand() % (handCount + 1);
 

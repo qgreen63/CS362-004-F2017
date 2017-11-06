@@ -44,6 +44,9 @@ int randomTestGen(int iterations) {
                 state.hand[t][i] = rand() % (treasure_map + 1);
         }
 
+        // Randomize played card count
+        state.playedCardCount = rand () % MAX_DECK;
+
         // Pick a random player
         t = rand() % numPlayer;
         
